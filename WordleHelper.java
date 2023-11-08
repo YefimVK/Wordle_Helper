@@ -41,6 +41,14 @@ public class WordleHelper {
         this.yellowSpaces.add(index);
     }
 
+    public List<Character> getYellowLetters(){
+        return this.yellowLetters;
+    }
+
+    public List<Integer> getYellowSpaces(){
+        return this.yellowSpaces;
+    }
+
     public void addGrayLetter(String letter){
         this.grayLetters += letter;
     }
@@ -137,14 +145,6 @@ public class WordleHelper {
             e.printStackTrace();
         }
         return dictionary;
-    }
-
-    public static void main(String[] args) {
-        WordleHelper helper = new WordleHelper();
-        List<String> dictionary = helper.loadDictionary("Wordle_Helper/dictionary.txt");
-        for(String i : dictionary){
-            System.out.println(i);
-        }
     }
 }
 
