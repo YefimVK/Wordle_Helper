@@ -48,8 +48,12 @@
         <input type="text" id="grayLetters">
         <label for="greenLetters">Green Letters:</label>
         <input type="text" id="greenLetters">
+        <label for="greenPositions">Green Positions:</label>
+        <input type="text" id="greenPositions">
         <label for="yellowLetters">Yellow Letters:</label>
         <input type="text" id="yellowLetters">
+        <label for="yellowPositions">Yellow Positions:</label>
+        <input type="text" id="yellowPositions">
         <button onclick="findPossibleWords()">Find Possible Words</button>
         <div id="result">
             <h3>Possible Words:</h3>
@@ -63,7 +67,9 @@
         function findPossibleWords() {
             const grayLetters = document.getElementById("grayLetters").value;
             const greenLetters = document.getElementById("greenLetters").value;
+            const greenPositions = document.getElementById("greenPositions").value;
             const yellowLetters = document.getElementById("yellowLetters").value;
+            const yellowPositions = document.getElementById("yellowPositions").value;
 
             wordleHelper.grayLetters = grayLetters;
             wordleHelper.greenLetters.clear();
@@ -71,11 +77,11 @@
             wordleHelper.yellowSpaces = [];
 
             for (let i = 0; i < greenLetters.length; i++) {
-                wordleHelper.addGreenLetter(i + 1, greenLetters[i]);
+                wordleHelper.addGreenLetter(parseInt(greenPositions[i]), greenLetters[i]);
             }
 
             for (let i = 0; i < yellowLetters.length; i++) {
-                wordleHelper.addYellowLetter(i + 1, yellowLetters[i]);
+                wordleHelper.addYellowLetter(parseInt(yellowPositions[i]), yellowLetters[i]);
             }
 
             const dictionary = wordleHelper.loadDictionary();
