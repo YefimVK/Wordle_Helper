@@ -72,16 +72,13 @@
             const yellowPositions = document.getElementById("yellowPositions").value;
 
             wordleHelper.grayLetters = grayLetters;
-            wordleHelper.greenLetters.clear();
-            wordleHelper.yellowLetters = [];
-            wordleHelper.yellowSpaces = [];
 
             for (let i = 0; i < greenLetters.length; i++) {
-                wordleHelper.addGreenLetter(parseInt(greenPositions[i]), greenLetters[i]);
+                wordleHelper.addGreenLetter(greenPositions[i], greenLetters[i]);
             }
 
             for (let i = 0; i < yellowLetters.length; i++) {
-                wordleHelper.addYellowLetter(parseInt(yellowPositions[i]), yellowLetters[i]);
+                wordleHelper.addYellowLetter(yellowPositions[i], yellowLetters[i]);
             }
 
             const dictionary = wordleHelper.loadDictionary();
