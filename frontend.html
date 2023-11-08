@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wordle Helper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        button {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wordle Helper</h2>
+        <p>Enter gray, green, and yellow letters:</p>
+        <label for="grayLetters">Gray Letters:</label>
+        <input type="text" id="grayLetters">
+        <label for="greenLetters">Green Letters:</label>
+        <input type="text" id="greenLetters">
+        <label for="yellowLetters">Yellow Letters:</label>
+        <input type="text" id="yellowLetters">
+        <button onclick="findPossibleWords()">Find Possible Words</button>
+        <div id="result">
+            <h3>Possible Words:</h3>
+            <ul id="possibleWordsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const wordleHelper = new WordleHelper();
+
+        function findPossibleWords() {
+            const grayLetters = document.getElementById("grayLetters").value;
+            const greenLetters = document.getElementById("greenLetters").value;
+            const yellowLetters = document.getElementById("yellowLetters").value;
+
+            wordleHelper.grayLetters = grayLetters;
+            wordleHelper.greenLetters.clear();
+            wordleHelper.yellowLetters = [];
+            wordleHelper.yellowSpaces = [];
+
+            for (let i = 0; i < greenLetters.length; i++) {
+                wordleHelper.addGreenLetter(i + 1, greenLetters[i]);
+            }
+
+            for (let i = 0; i < yellowLetters.length; i++) {
+                wordleHelper.addYellowLetter(i + 1, yellowLetters[i]);
+            }
+
+            const dictionary = wordleHelper.loadDictionary();
+
+            const possibleWords = wordleHelper.findPossibleWords(dictionary);
+
+            const possibleWordsList = document.getElementById("possibleWordsList");
+            possibleWordsList.innerHTML = "";
+
+            if (possibleWords.length === 0) {
+                possibleWordsList.innerHTML = "<li>No possible words found.</li>";
+            } else {
+                possibleWords.forEach(word => {
+                    const li = document.createElement("li");
+                    li.textContent = word;
+                    possibleWordsList.appendChild(li);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
