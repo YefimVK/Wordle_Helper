@@ -60,44 +60,5 @@
             <ul id="possibleWordsList"></ul>
         </div>
     </div>
-
-    <script>
-        const wordleHelper = new WordleHelper();
-
-        function findPossibleWords() {
-            const grayLetters = document.getElementById("grayLetters").value;
-            const greenLetters = document.getElementById("greenLetters").value;
-            const greenPositions = document.getElementById("greenPositions").value;
-            const yellowLetters = document.getElementById("yellowLetters").value;
-            const yellowPositions = document.getElementById("yellowPositions").value;
-
-            wordleHelper.grayLetters = grayLetters;
-
-            for (let i = 0; i < greenLetters.length; i++) {
-                wordleHelper.addGreenLetter(greenPositions[i], greenLetters[i]);
-            }
-
-            for (let i = 0; i < yellowLetters.length; i++) {
-                wordleHelper.addYellowLetter(yellowPositions[i], yellowLetters[i]);
-            }
-
-            const dictionary = wordleHelper.loadDictionary();
-
-            const possibleWords = wordleHelper.findPossibleWords(dictionary);
-
-            const possibleWordsList = document.getElementById("possibleWordsList");
-            possibleWordsList.innerHTML = "";
-
-            if (possibleWords.length === 0) {
-                possibleWordsList.innerHTML = "<li>No possible words found.</li>";
-            } else {
-                possibleWords.forEach(word => {
-                    const li = document.createElement("li");
-                    li.textContent = word;
-                    possibleWordsList.appendChild(li);
-                });
-            }
-        }
-    </script>
 </body>
 </html>
